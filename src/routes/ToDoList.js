@@ -1,33 +1,36 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 const ToDoList = () => {
-  const [toDo, setToDo] = useState("")
+  const [toDo, setToDo] = useState('');
   const [toDos, setToDos] = useState([]);
 
-  const onChange = (e) => setToDo(e.target.value)
+  const onChange = (e) => setToDo(e.target.value);
   const onSubmit = (e) => {
     e.preventDefault();
-    if(toDo === "") return;
+    if (toDo === '') return;
     setToDos((currentToDos) => [toDo, ...currentToDos]);
-    setToDo("");
-  }
+    setToDo('');
+  };
 
   return (
     <div>
-      <h2>To Do List</h2>
+      <h2>To Do List {toDos.length > 0 ? `(${toDos.length})` : null}</h2>
       <form onSubmit={onSubmit}>
-        <input type="text" onChange={onChange} value={toDo} placeholder="Enter your to-do"/>
+        <input
+          type="text"
+          onChange={onChange}
+          value={toDo}
+          placeholder="Enter your to-do"
+        />
         <button>Submit</button>
       </form>
       <ul>
         {toDos.map((todo, idx) => {
-          return (
-            <li key={idx}>{todo}</li>
-          )
+          return <li key={idx}>{todo}</li>;
         })}
       </ul>
     </div>
-  )
-}
+  );
+};
 
 export default ToDoList;
